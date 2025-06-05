@@ -4,7 +4,7 @@ import time
 
 import display
 
-G = 10
+G = 1
 
 class Particle:
     def __init__(self, x, vel):
@@ -13,8 +13,8 @@ class Particle:
         self.f_net = np.array([0.0,0.0,0.0])
     
 class Simulation:
-    def __init__(self, num_particles, length):
-        self.particles = [Particle(np.array([random.normalvariate(0, 160), random.normalvariate(0, 160), 0]), np.array([0.0,0.0,0.0])) for _ in range(num_particles)]
+    def __init__(self, num_particles, length, sigma):
+        self.particles = [Particle(np.array([random.normalvariate(0, sigma), random.normalvariate(0, sigma), random.normalvariate(0, sigma)]), np.array([random.normalvariate(0, 2),random.normalvariate(0, 2),random.normalvariate(0, 2)])) for _ in range(num_particles)]
 
         display.init()
         
@@ -52,8 +52,8 @@ class Simulation:
         coords = []
         for particle in self.particles:
             #coords.append(particle.x.tolist())
-            coords.append([particle.x[0], particle.x[1]])
+            coords.append(particle.x)
         print("coords:", coords, "\n")
         display.update(coords)
 
-sim = Simulation(50, 4000)
+sim = Simulation(20, 4000, 200)
