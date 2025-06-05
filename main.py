@@ -4,7 +4,7 @@ import time
 
 import display
 
-G = 1
+G = 0.4
 
 class Particle:
     def __init__(self, x, vel):
@@ -14,13 +14,14 @@ class Particle:
     
 class Simulation:
     def __init__(self, num_particles, length, sigma):
-        self.particles = [Particle(np.array([random.normalvariate(0, sigma), random.normalvariate(0, sigma), random.normalvariate(0, sigma)]), np.array([random.normalvariate(0, 2),random.normalvariate(0, 2),random.normalvariate(0, 2)])) for _ in range(num_particles)]
+        self.particles = [Particle(np.array([random.normalvariate(0, sigma), random.normalvariate(0, sigma), random.normalvariate(0, sigma)]),
+                                   np.array([0.0,0.0,0.0])) for _ in range(num_particles)]
 
         display.init()
         
         for tick_id in range(length):
             self.tick()
-            time.sleep(0.01)
+            time.sleep(0.005)
             if (tick_id % 5) == 0:
                 self.display()
 
@@ -56,4 +57,4 @@ class Simulation:
         print("coords:", coords, "\n")
         display.update(coords)
 
-sim = Simulation(20, 4000, 200)
+sim = Simulation(50, 4000, 200)
